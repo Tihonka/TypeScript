@@ -1,0 +1,26 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rd -r public\\scripts 2>null & tsc",
+    "build:dev": "rd -r public\\scripts 2>null & tsc -p tsconfig-dev.json",
+    "start": "http-server -p 3000 -c-1",
+    "lint": "eslint src --ext .js --ext .ts",
+    "lint-fix": "eslint src --ext .js --ext .ts --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tihonka/TypeScript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tihonka/TypeScript/issues"
+  },
+  "homepage": "https://github.com/Tihonka/TypeScript#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
+    "http-server": "^14.1.0",
+    "typescript": "^4.5.4"
+  }
+}
