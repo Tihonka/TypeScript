@@ -1,13 +1,17 @@
 import { renderBlock } from './lib.js'
+import { search, SearchFormData } from './search-handler.js'
 
 export function renderSearchFormBlock (arrivalDate?: Date, departureDate?: Date) {
   const today: Date = new Date()
   today.setHours(0,0,0,0)
   const maxDate: Date = new Date(today.getFullYear(), today.getMonth() + 2, 0)
+
+  
+
   renderBlock(
     'search-form-block',
     `
-    <form>
+    <form id="searchForm">
       <fieldset class="search-filedset">
         <div class="row">
           <div>
@@ -40,11 +44,25 @@ export function renderSearchFormBlock (arrivalDate?: Date, departureDate?: Date)
             <input id="max-price" type="text" value="" name="price" class="max-price" />
           </div>
           <div>
-            <div><button>Найти</button></div>
+            <div><button type="submit">Найти</button></div>
           </div>
         </div>
       </fieldset>
     </form>
     `
   )
+
+  const form = document.getElementById('searchForm')
+  form.addEventListener('submit', function(e) {
+    e.preventDefault()
+    const formData = new FormData(form as HTMLFormElement)
+    
+    const inputValues: SearchFormData = {
+      checkin: String(formData.get('checkin')),
+      checkout: String(formData.get('checkout')),
+      price: +formData.get('price')
+    }
+          
+    search(inputValues)
+  })
 }
