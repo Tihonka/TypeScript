@@ -41,7 +41,7 @@ export function renderSearchFormBlock (arrivalDate?: Date, departureDate?: Date)
           </div>
           <div>
             <label for="max-price">Макс. цена суток</label>
-            <input id="max-price" type="text" value="" name="price" class="max-price" />
+            <input id="max-price" type="number" value="0" name="price" class="max-price" />
           </div>
           <div>
             <div><button type="submit">Найти</button></div>
@@ -53,16 +53,18 @@ export function renderSearchFormBlock (arrivalDate?: Date, departureDate?: Date)
   )
 
   const form = document.getElementById('searchForm')
-  form.addEventListener('submit', function(e) {
-    e.preventDefault()
-    const formData = new FormData(form as HTMLFormElement)
+  if (form != null){
+    form.addEventListener('submit', function(e) {
+      e.preventDefault()
+      const formData = new FormData(form as HTMLFormElement)
     
-    const inputValues: SearchFormData = {
-      checkin: String(formData.get('checkin')),
-      checkout: String(formData.get('checkout')),
-      price: +formData.get('price')
-    }
+      const inputValues: SearchFormData = {
+        checkin: String(formData.get('checkin')),
+        checkout: String(formData.get('checkout')),
+        price: Number(formData.get('price'))
+      }
           
-    search(inputValues)
-  })
+      search(inputValues)
+    })
+  }
 }
